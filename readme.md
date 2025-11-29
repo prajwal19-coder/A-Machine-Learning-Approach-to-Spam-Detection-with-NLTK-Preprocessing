@@ -1,6 +1,1 @@
-This project implements a spam detection system using Natural Language Processing (NLP) with NLTK. It downloads necessary datasets like `punkt`, `stopwords`, and `wordnet`, preprocesses messages, and trains a classifier to distinguish between ham and spam messages.
-
-The model achieves 75% accuracy on the test dataset. Evaluation includes:
-- Precision, recall, and F1-score for both classes
-- Confusion matrix visualization
-- Interactive mode for testing custom messages
+A Python project that uses Hugging Face Datasets, NLTK, and scikit‑learn to classify emails as spam or ham. It includes text preprocessing (stopword removal, lemmatization), feature extraction with bag‑of‑words, training a Naive Bayes model, evaluation metrics, and an interactive mode for real‑time predictions.
