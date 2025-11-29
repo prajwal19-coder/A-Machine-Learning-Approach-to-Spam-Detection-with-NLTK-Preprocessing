@@ -1,5 +1,6 @@
-# span_ham_ml_interactive.py
+# spam_ham_ml_interactive.py
 
+from datasets import load_dataset
 import pandas as pd
 import string
 import nltk
@@ -19,17 +20,32 @@ nltk.download('stopwords')
 nltk.download('wordnet')
 
 # ---------------------------
-# 2. Load Dataset
+# 2. Load Dataset from Hugging Face
 # ---------------------------
-try:
-    data = pd.read_csv("data.txt", sep="|")
-    if 'message' not in data.columns or 'label' not in data.columns:
-        raise ValueError
-except:
-    data = pd.read_csv("data.txt", sep="|", names=["label", "message"])
+print("Loading dataset from Hugging Face...")
+ds = load_dataset("UniqueData/email-spam-classification")
+
+# Convert HF dataset to DataFrame
+data = ds['train'].to_pandas()
+
+# Show columns for debugging
+print("Columns in dataset:", data.columns.tolist())
+print(data.head())
+
+# ---------------------------
+# 2a. Column Handling
+# ---------------------------
+# Map dataset columns to standard names
+if "text" in data.columns and "type" in data.columns:
+    data = data.rename(columns={"text": "message", "type": "label"})
+else:
+    raise ValueError(f"Dataset does not have expected columns. Found: {data.columns.tolist()}")
 
 # Remove missing messages
 data.dropna(subset=['message'], inplace=True)
+
+# Normalize labels: convert 'not spam' → 'ham'
+data['label'] = data['label'].replace({"not spam": "ham", "spam": "spam"})
 
 # ---------------------------
 # 3. Preprocessing Function
@@ -40,7 +56,7 @@ def preprocess_text(text):
     words = text.split()
     stop_words = set(stopwords.words('english'))
     words = [word for word in words if word not in stop_words]
-    if not words:  # Keep at least some words
+    if not words:
         words = text.split()
     lemmatizer = WordNetLemmatizer()
     words = [lemmatizer.lemmatize(word) for word in words]
@@ -58,7 +74,9 @@ y = data['label']
 # ---------------------------
 # 5. Train-Test Split
 # ---------------------------
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
 
 # ---------------------------
 # 6. Train Naive Bayes Model
