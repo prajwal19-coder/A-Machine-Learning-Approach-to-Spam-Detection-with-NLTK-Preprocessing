@@ -1,0 +1,18 @@
+spam|Congratulations! You have won a $1000 Walmart gift card. Click here to claim.
+ham|Hey, are we still meeting for lunch tomorrow?
+spam|You have been selected for a free iPhone. Act now!
+ham|Don't forget to bring the documents to the office today.
+spam|Earn $5000 working from home. Limited offer!
+ham|Can you call me when you get a chance?
+spam|Your account has been compromised. Reset your password immediately.
+ham|Happy birthday! Hope you have a great day!
+spam|Winner! You have been chosen for a free vacation to Bahamas.
+ham|Let's catch up over coffee this weekend.
+spam|Get cheap medicines online without prescription.
+ham|Please review the attached report and send your feedback.
+spam|You are eligible for a cash bonus. Click here to claim.
+ham|Thanks for your help yesterday. Really appreciate it!
+spam|Limited time offer! Buy one get one free.
+ham|See you at the gym later today.
+spam|Congratulations! You have been selected for a prize.
+ham|Reminder: Your appointment is scheduled for 3 PM tomorrow.
